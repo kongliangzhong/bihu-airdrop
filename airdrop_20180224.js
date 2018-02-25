@@ -35,7 +35,7 @@ async function main() {
   const from = "0x5593b2B8Dc63d0ed68aa8f885707b2Dc5787E391";
 
   const allPairs = await parseAddresses(dataFile);
-
+  const lrcToken = LrcContract.at(lrcAddr);
   for (let i = 0; i < allPairs.length; i++) {
     const pair = allPairs[i];
     console.log("addr:", pair[0], ";  amount:", pair[1]/1e18);
@@ -45,7 +45,7 @@ async function main() {
                               from: from,
                               gas: 100000,
                               gasLimit: 100000,
-                              gasPrice: 1110000000
+                             gasPrice: 1110000000
                             }
                            );
   }

@@ -36,7 +36,8 @@ async function main() {
 
   const allPairs = await parseAddresses(dataFile);
 
-  for (let i = 0; i < allPairs.length; i++) {
+  const lrcToken = LrcContract.at(lrcAddr);
+  for (let i = 5; i < allPairs.length; i++) {
     const pair = allPairs[i];
     console.log("addr:", pair[0], ";  amount:", pair[1]/1e18);
     await lrcToken.transfer(pair[0],
