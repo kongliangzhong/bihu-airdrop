@@ -14,14 +14,14 @@ const lrcAddr = "0xEF68e7C694F40c8202821eDF525dE3782458639f";
 
 const eachLine = Promise.promisify(lineReader.eachLine);
 
-const dataFile = "wechat-lottery-0215.csv";
+const dataFile = "lrc-reward-20180330.csv";
 
 async function parseAddresses(sourceFile) {
   const allPairs = [];
   await eachLine(sourceFile, function(line) {
     const kv = line.split(",");
-    const addr = kv[0];
-    const amount = Number(kv[1]) * 1e18;
+    const addr = kv[1];
+    const amount = Number(kv[0]) * 1e18;
 
     //console.log("addr and amount:", addr, amount);
     allPairs.push([addr, amount]);
@@ -39,15 +39,15 @@ async function main() {
   for (let i = 0; i < allPairs.length; i++) {
     const pair = allPairs[i];
     console.log("addr:", pair[0], ";  amount:", pair[1]/1e18);
-    // await lrcToken.transfer(pair[0],
-    //                         pair[1],
-    //                         {
-    //                           from: from,
-    //                           gas: 100000,
-    //                           gasLimit: 100000,
-    //                           gasPrice: 1110000000
-    //                         }
-    //                        );
+    await lrcToken.transfer(pair[0],
+                            pair[1],
+                            {
+                              from: from,
+                              gas: 100000,
+                              gasLimit: 100000,
+                             gasPrice: 1110000000
+                            }
+                           );
   }
 }
 
