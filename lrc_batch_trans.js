@@ -14,14 +14,14 @@ const lrcAddr = "0xEF68e7C694F40c8202821eDF525dE3782458639f";
 
 const eachLine = Promise.promisify(lineReader.eachLine);
 
-const dataFile = "lrc-batch-trans-0404.csv";
+const dataFile = "lrc-reward-20180615.csv";
 
 async function parseAddresses(sourceFile) {
   const allPairs = [];
   await eachLine(sourceFile, function(line) {
     const kv = line.split(",");
-    const addr = kv[1];
-    const amount = Number(kv[0]) * 1e18;
+    const addr = kv[0];
+    const amount = Number(kv[1]) * 1e18;
 
     //console.log("addr and amount:", addr, amount);
     allPairs.push([addr, amount]);
